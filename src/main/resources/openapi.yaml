@@ -1,13 +1,11 @@
----
 openapi: 3.0.0
+servers: []
 info:
-  title: Persons V1
   description: Permite crear, consultar y listar a las personas.
+  version: "1.0.0"
+  title: Persons V1
   contact:
     email: joselopez11c@gmail.com
-  version: 1.0.0
-servers:
-  - url: /
 tags:
   - name: Person
     description: Person Controller
@@ -17,9 +15,9 @@ paths:
       tags:
         - Person
       summary: Crea personas.
+      operationId: createPerson
       description: |
         Endpoint que permite crear personas.
-      operationId: createPerson
       requestBody:
         description: Entrada del Servicio.
         content:
@@ -30,43 +28,41 @@ paths:
             schema:
               $ref: '#/components/schemas/PersonCreateRequest'
       responses:
-        "201":
+        '201':
           description: Se creó la persona.
-        "400":
+        '400':
           description: Error en Request.
-        "500":
+        '500':
           description: Error en el servidor.
   /kpideclientes:
     get:
       tags:
         - Person
       summary: Promedio de edad entre todos los clientes.
+      operationId: searchKpiPerson
       description: |
         Promedio de edad entre todos los clientes.
-      operationId: searchKpiPerson
       responses:
-        "200":
+        '200':
           description: Promedio de edad entre todos los clientes.
           content:
             application/json:
               schema:
-                type: array
-                items:
-                  $ref: '#/components/schemas/PersonKpiResponse'
-        "400":
+                $ref: '#/components/schemas/PersonKpiResponse'
+        '400':
           description: Error en Request.
-        "500":
+        '500':
           description: Error en el servidor.
   /listclientes:
     get:
       tags:
         - Person
       summary: Lista de personas
+      operationId: searchListClient
       description: |
         Lista de personas con todos los datos con su fecha probable de muerte de cada una.
-      operationId: searchListClient
       responses:
-        "200":
+        '200':
           description: search results matching criteria
           content:
             application/json:
@@ -74,43 +70,43 @@ paths:
                 type: array
                 items:
                   $ref: '#/components/schemas/PersonResponse'
-        "400":
+        '400':
           description: Error en Request.
-        "500":
+        '500':
           description: Error en el servidor.
 components:
   schemas:
     PersonCreateRequest:
       title: PersonCreateRequest
       required:
-        - age
-        - lastName
         - name
+        - lastName
+        - age
       type: object
       properties:
         name:
-          maxLength: 50
-          minLength: 1
           type: string
           description: Nombres
-          example: Juan Carlos
-        lastName:
           maxLength: 50
           minLength: 1
+          example: Juan Carlos
+        lastName:
           type: string
           description: Apellidos
+          maxLength: 50
+          minLength: 1
           example: Lopez Cure
         age:
-          maxLength: 2
-          minLength: 1
           type: string
           description: Edad
-          example: "28"
+          maxLength: 2
+          minLength: 1
+          example: 28
         birthDate:
           type: string
-          description: Fecha de nacimiento
           format: date
-          example: 2021-01-30
+          description: Fecha de nacimiento
+          example: "2021-01-30"
     PersonKpiResponse:
       title: PersonKpiResponse
       type: object
@@ -126,30 +122,30 @@ components:
       type: object
       properties:
         name:
-          maxLength: 50
-          minLength: 1
           type: string
           description: Nombres
-          example: Juan Carlos
-        lastName:
           maxLength: 50
           minLength: 1
+          example: Juan Carlos
+        lastName:
           type: string
           description: Apellidos
+          maxLength: 50
+          minLength: 1
           example: Lopez Cure
         age:
-          maxLength: 2
-          minLength: 1
           type: string
           description: Edad
-          example: "28"
+          maxLength: 2
+          minLength: 1
+          example: 28
         birthDate:
           type: string
-          description: Fecha de nacimiento
           format: date
-          example: 2021-01-30
+          description: Fecha de nacimiento
+          example: "2021-01-30"
         probableDateDeath:
           type: string
-          description: Fecha probable de muerte
           format: date
-          example: 2021-01-30
+          description: Fecha probable de muerte
+          example: "2021-01-30"

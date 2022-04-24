@@ -19,7 +19,7 @@ public class PersonEntity {
     private Long id;
     private String name;
     private String lastName;
-    private String age;
+    private int age;
     private LocalDate birthDate;
 
 }

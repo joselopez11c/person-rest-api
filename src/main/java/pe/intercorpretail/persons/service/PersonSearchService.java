@@ -6,7 +6,7 @@ import pe.intercorpretail.persons.model.PersonResponse;
 import java.util.List;
 
 public interface PersonSearchService {
-    List<PersonKpiResponse> searchKpi();
+    PersonKpiResponse searchKpi();
 
     List<PersonResponse> searchAllPerson();
 }

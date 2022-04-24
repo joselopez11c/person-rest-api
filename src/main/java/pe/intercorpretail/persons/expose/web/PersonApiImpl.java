@@ -3,6 +3,9 @@ package pe.intercorpretail.persons.expose.web;
 import lombok.RequiredArgsConstructor;
 import org.springframework.http.ResponseEntity;
 import org.springframework.stereotype.Component;
+import org.springframework.stereotype.Controller;
+import org.springframework.web.bind.annotation.RequestMapping;
+import org.springframework.web.bind.annotation.RestController;
 import org.springframework.web.context.request.NativeWebRequest;
 import pe.intercorpretail.persons.exponse.web.CreaclienteApi;
 import pe.intercorpretail.persons.exponse.web.KpideclientesApi;
@@ -17,7 +20,9 @@ import java.util.List;
 import java.util.Optional;
 
 @Component
+@RestController
 @RequiredArgsConstructor
+@RequestMapping("persons/")
 public class PersonApiImpl implements CreaclienteApi, KpideclientesApi, ListclientesApi {
 
     private final PersonCreateService createService;
@@ -29,13 +34,13 @@ public class PersonApiImpl implements CreaclienteApi, KpideclientesApi, Listclie
     }
 
     @Override
-    public ResponseEntity<List<PersonKpiResponse>> searchKpiPerson() {
-        return searchService.searchKpi();
+    public ResponseEntity<PersonKpiResponse> searchKpiPerson() {
+        return ResponseEntity.ok(searchService.searchKpi());
     }
 
     @Override
     public ResponseEntity<List<PersonResponse>> searchListClient() {
-        return searchService.searchAllPerson();
+        return ResponseEntity.ok(searchService.searchAllPerson());
     }
 
 
@@ -51,7 +56,7 @@ public class PersonApiImpl implements CreaclienteApi, KpideclientesApi, Listclie
     }
 
     @Override
-    public ResponseEntity<List<PersonKpiResponse>> _searchKpiPerson() {
+    public ResponseEntity<PersonKpiResponse> _searchKpiPerson() {
         return KpideclientesApi.super._searchKpiPerson();
     }
 

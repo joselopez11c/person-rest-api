@@ -3,6 +3,7 @@ package pe.intercorpretail.persons.service.impl;
 import lombok.RequiredArgsConstructor;
 import org.springframework.http.ResponseEntity;
 import org.springframework.stereotype.Service;
+import org.springframework.web.bind.annotation.RequestMapping;
 import pe.intercorpretail.persons.builder.PersonBuilder;
 import pe.intercorpretail.persons.model.PersonCreateRequest;
 import pe.intercorpretail.persons.repository.PersonRepository;
