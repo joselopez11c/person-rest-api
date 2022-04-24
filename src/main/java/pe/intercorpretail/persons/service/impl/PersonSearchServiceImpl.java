@@ -9,7 +9,6 @@ import pe.intercorpretail.persons.repository.PersonRepository;
 import pe.intercorpretail.persons.service.PersonSearchService;
 
 import java.math.BigDecimal;
-import java.util.Arrays;
 import java.util.List;
 import java.util.stream.Collectors;
 
@@ -48,7 +47,6 @@ public class PersonSearchServiceImpl implements PersonSearchService {
 
     @Override
     public List<PersonResponse> searchAllPerson() {
-        var persons = PersonBuilder.entityToResponseAll(repository.findAll());
-        return persons;
+        return PersonBuilder.entityToResponseAll(repository.findAll());
     }
 }

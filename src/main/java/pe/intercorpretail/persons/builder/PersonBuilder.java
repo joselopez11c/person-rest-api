@@ -4,8 +4,10 @@ import pe.intercorpretail.persons.model.PersonCreateRequest;
 import pe.intercorpretail.persons.model.PersonEntity;
 import pe.intercorpretail.persons.model.PersonResponse;
 
+import java.time.LocalDate;
 import java.util.ArrayList;
 import java.util.List;
+import java.util.Random;
 
 public class PersonBuilder {
     public static PersonEntity requestToEntity(PersonCreateRequest request) {
@@ -29,6 +31,15 @@ public class PersonBuilder {
                 .lastName(entity.getLastName())
                 .age(String.valueOf(entity.getAge()))
                 .birthDate(entity.getBirthDate())
+                .probableDateDeath(generatedDateDeath(entity.getBirthDate()))
                 .build();
     }
+
+    private static LocalDate generatedDateDeath(LocalDate birthDate) {
+        var year = birthDate.getYear();
+        var date = LocalDate.now();
+        return date.plusYears(new Random().nextInt( (year > 50 ? 50 : 5) + 1) + 5);
+    }
+
+
 }
