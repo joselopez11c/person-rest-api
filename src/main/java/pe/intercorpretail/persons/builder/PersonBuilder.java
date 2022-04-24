@@ -13,7 +13,7 @@ public class PersonBuilder {
                 .name(request.getName())
                 .lastName(request.getLastName())
                 .birthDate(request.getBirthDate())
-//                .age(request.getAge())
+                .age(Integer.parseInt(request.getAge()))
                 .build();
     }
 
