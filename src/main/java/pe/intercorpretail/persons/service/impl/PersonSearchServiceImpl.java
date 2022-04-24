@@ -9,6 +9,7 @@ import pe.intercorpretail.persons.repository.PersonRepository;
 import pe.intercorpretail.persons.service.PersonSearchService;
 
 import java.math.BigDecimal;
+import java.math.RoundingMode;
 import java.util.List;
 import java.util.stream.Collectors;
 
@@ -29,8 +30,8 @@ public class PersonSearchServiceImpl implements PersonSearchService {
         BigDecimal standardDeviation = calculateStandardDeviation(persons, average);
 
         return PersonKpiResponse.builder()
-                .averageAge(average)
-                .standardDeviation(standardDeviation)
+                .averageAge(average.setScale(2, RoundingMode.HALF_UP))
+                .standardDeviation(standardDeviation.setScale(2, RoundingMode.HALF_UP))
                 .build();
     }
 

@@ -38,7 +38,7 @@ public class PersonBuilder {
     private static LocalDate generatedDateDeath(LocalDate birthDate) {
         var year = birthDate.getYear();
         var date = LocalDate.now();
-        return date.plusYears(new Random().nextInt( (year > 50 ? 50 : 5) + 1) + 5);
+        return date.plusYears(new Random().nextInt( (year > 50 ? 10 : 50) + 1) + 5);
     }
 
 
