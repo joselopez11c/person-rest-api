@@ -1,0 +1,155 @@
+---
+openapi: 3.0.0
+info:
+  title: Persons V1
+  description: Permite crear, consultar y listar a las personas.
+  contact:
+    email: joselopez11c@gmail.com
+  version: 1.0.0
+servers:
+  - url: /
+tags:
+  - name: Person
+    description: Person Controller
+paths:
+  /creacliente:
+    post:
+      tags:
+        - Person
+      summary: Crea personas.
+      description: |
+        Endpoint que permite crear personas.
+      operationId: createPerson
+      requestBody:
+        description: Entrada del Servicio.
+        content:
+          application/json:
+            schema:
+              $ref: '#/components/schemas/PersonCreateRequest'
+          application/json;charset=UTF-8:
+            schema:
+              $ref: '#/components/schemas/PersonCreateRequest'
+      responses:
+        "201":
+          description: Se creó la persona.
+        "400":
+          description: Error en Request.
+        "500":
+          description: Error en el servidor.
+  /kpideclientes:
+    get:
+      tags:
+        - Person
+      summary: Promedio de edad entre todos los clientes.
+      description: |
+        Promedio de edad entre todos los clientes.
+      operationId: searchKpiPerson
+      responses:
+        "200":
+          description: Promedio de edad entre todos los clientes.
+          content:
+            application/json:
+              schema:
+                type: array
+                items:
+                  $ref: '#/components/schemas/PersonKpiResponse'
+        "400":
+          description: Error en Request.
+        "500":
+          description: Error en el servidor.
+  /listclientes:
+    get:
+      tags:
+        - Person
+      summary: Lista de personas
+      description: |
+        Lista de personas con todos los datos con su fecha probable de muerte de cada una.
+      operationId: searchListClient
+      responses:
+        "200":
+          description: search results matching criteria
+          content:
+            application/json:
+              schema:
+                type: array
+                items:
+                  $ref: '#/components/schemas/PersonResponse'
+        "400":
+          description: Error en Request.
+        "500":
+          description: Error en el servidor.
+components:
+  schemas:
+    PersonCreateRequest:
+      title: PersonCreateRequest
+      required:
+        - age
+        - lastName
+        - name
+      type: object
+      properties:
+        name:
+          maxLength: 50
+          minLength: 1
+          type: string
+          description: Nombres
+          example: Juan Carlos
+        lastName:
+          maxLength: 50
+          minLength: 1
+          type: string
+          description: Apellidos
+          example: Lopez Cure
+        age:
+          maxLength: 2
+          minLength: 1
+          type: string
+          description: Edad
+          example: "28"
+        birthDate:
+          type: string
+          description: Fecha de nacimiento
+          format: date
+          example: 2021-01-30
+    PersonKpiResponse:
+      title: PersonKpiResponse
+      type: object
+      properties:
+        averageAge:
+          type: number
+          example: 26
+        standardDeviation:
+          type: number
+          example: 1.5
+    PersonResponse:
+      title: PersonResponse
+      type: object
+      properties:
+        name:
+          maxLength: 50
+          minLength: 1
+          type: string
+          description: Nombres
+          example: Juan Carlos
+        lastName:
+          maxLength: 50
+          minLength: 1
+          type: string
+          description: Apellidos
+          example: Lopez Cure
+        age:
+          maxLength: 2
+          minLength: 1
+          type: string
+          description: Edad
+          example: "28"
+        birthDate:
+          type: string
+          description: Fecha de nacimiento
+          format: date
+          example: 2021-01-30
+        probableDateDeath:
+          type: string
+          description: Fecha probable de muerte
+          format: date
+          example: 2021-01-30
